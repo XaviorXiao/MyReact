@@ -6,54 +6,59 @@
  * @flow
  */
 
-import {createStackNavigator, createAppContainer,createBottomTabNavigator} from 'react-navigation';
+import React from 'react'
+import {
+  ActivityIndicator,
+  AsyncStorage,
+  View,
+  StatusBar,
+  Button,
+} from 'react-native'
 
-import HomeScreen from './src/Home';
-import DetailScreen from './src/Detail'
+import {
+ createStackNavigator,
+ createAppContainer,
+ createSwitchNavigator,
+}from 'react-navigation'
 
-import MineScreen from './src/Mine'
-import SettingScreen from './src/Setting'
+import MainScreen from './src/Main'
+import SignInScreen from './src/LoginPage/SignIn'
 
-const AppNavigator =  createStackNavigator(
-  {
-  Home: {screen: HomeScreen},
-  Detail: {screen: DetailScreen}
-},
-{
-  initialRouteName:'Home',
-  defaultNavigationOptions:{
-    headerStyle: {
-      backgroundColor: '#f4511e'
-    },
-    headerTintColor:'#fff',
-    headerTitleStyle:{
-      fontWeight: 'bold',
-      // color: '#000',
-    }
-  },
-  navigationOptions:{
-    tabBarLabel : 'Home!',
+class AuthLoadingScreen extends React.Component {
+  constructor(props){
+    super(props);
+    this._bootstrpsAsyns();
+
+  }
+
+  _bootstrpsAsyns = async() =>{
+    const userToken = await AsyncStorage.getItem('userToken');
+    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+  }
+  render (){
+    return(<View>
+      <ActivityIndicator/>
+     <StatusBar barStyle = 'default'/>
+    </View>)
   }
 }
-)
 
-const PersonNavigaotr = createStackNavigator(
+
+const LoginStack = createStackNavigator({
+   Login: {screen : SignInScreen},
+})
+
+
+export default createAppContainer(createSwitchNavigator (
   {
-    Mine: {screen : MineScreen},
-    Setting:{screen : SettingScreen}
-  }
-)
-
-
-const TabNavigator = createBottomTabNavigator(
-  {
-      Home: {screen: AppNavigator}, 
-      Person: {screen: PersonNavigaotr}  
-  }
- )
-
-export default createAppContainer(TabNavigator);
-
+    AuthLoading: AuthLoadingScreen,
+    App: MainScreen,
+    Auth: LoginStack
+},
+{
+  initialRouteName: 'AuthLoading',
+}
+))
 
 
 

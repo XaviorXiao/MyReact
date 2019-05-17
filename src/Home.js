@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View,Button,Image,Alert} from 'react-native';
+import { Text, View,Button,Image,Alert,AsyncStorage} from 'react-native';
 
 // class  LogoTitle extends React.Component{
 //     render(){
@@ -42,6 +42,12 @@ import { Text, View,Button,Image,Alert} from 'react-native';
     Alert.alert(this.state.count)
   }
 
+  //登出操作
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth')
+  }
+
    render(){
      console.log('this is home page')
      return(<View style = {{ flex : 1, justifyContent : 'center' , alignItems: 'center'}}>
@@ -51,6 +57,8 @@ import { Text, View,Button,Image,Alert} from 'react-native';
        otherParas: 'add other params you want'
      })}
      title = 'Go to Detail'/>
+     <Button onPress = {this._signOutAsync}
+     title = '退出登录'/>
      </View>)
    }
 
