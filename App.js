@@ -23,6 +23,8 @@ import {
 
 import MainScreen from './src/Main'
 import SignInScreen from './src/LoginPage/SignIn'
+import ForgetPasswordScreen from './src/LoginPage/ForgetPassword'
+import RegisterScreen from './src/LoginPage/Register'
 
 class AuthLoadingScreen extends React.Component {
   constructor(props){
@@ -46,6 +48,8 @@ class AuthLoadingScreen extends React.Component {
 
 const LoginStack = createStackNavigator({
    Login: {screen : SignInScreen},
+   SetPW:{screen: ForgetPasswordScreen},
+   Register:{screen : RegisterScreen}
 })
 
 
