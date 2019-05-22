@@ -1,24 +1,17 @@
 import React from 'react'
-import { Text, View,Button,Image,Alert,AsyncStorage} from 'react-native';
+import { Text, View,Button,Image,Alert,AsyncStorage,StyleSheet} from 'react-native';
 
-// class  LogoTitle extends React.Component{
-//     render(){
-//       return <Image
-//       source = {require('../images/cardcoupons.png')}
-//       style = {{width : 30 , height: 30}}/>
-//     }
-//  }
+import ViewPager from './component/viewpage'
+import HeaderImage from './component/HeaderImage'
 
-// class HomeScreen extends React.Component{
-//   render(){
-//     <View style = {{ flex : 1, justifyContent : 'center' , alignItems: 'center'}}>
-//      <Text> HomeScreen </Text>
-//      <Button onPress = {() => this.props.navigation.navigate('Detail')}
-//      title = 'Go to Detail'/>
-//      </View>
-//   }
-// }
- 
+
+
+const imageUrls = ['https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=760528960,2729756840&fm=26&gp=0.jpg', 
+     'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558514797592&di=b7404ddc598d9e395f33f36ef883ebf4&imgtype=0&src=http%3A%2F%2Fc4.haibao.cn%2Fimg%2F600_0_100_0%2F1530690356.3493%2F81eaeb56a5255d33fdb280712f3b252d.jpg',
+      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558514797592&di=4fc04bc668b9a3ec1e1e75208aeb4b43&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F7Po3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F4b90f603738da977a600eedebb51f8198618e31c.jpg'];
+
+const imageUrl =  imageUrls[0];
+
  class HomeScreen extends React.Component{
    static navigationOptions = ({navigation}) => { 
      return{
@@ -47,10 +40,13 @@ import { Text, View,Button,Image,Alert,AsyncStorage} from 'react-native';
     await AsyncStorage.clear();
     this.props.navigation.navigate('Auth')
   }
-
-   render(){
-     console.log('this is home page')
-     return(<View style = {{ flex : 1, justifyContent : 'center' , alignItems: 'center'}}>
+  
+  render(){
+    console.log('this is home page')
+     return(
+     <View style = {{ flex : 1 , alignItems: 'center'}}>
+     <ViewPager imageUrls ={imageUrls}/>
+     <HeaderImage imageUrl = {imageUrl}/>
      <Text> HomeScreen </Text>
      <Button onPress = {() => this.props.navigation.navigate('Detail',{
        itemId: 86,
@@ -59,11 +55,20 @@ import { Text, View,Button,Image,Alert,AsyncStorage} from 'react-native';
      title = 'Go to Detail'/>
      <Button onPress = {this._signOutAsync}
      title = '退出登录'/>
-     </View>)
+     <View style = {[styles.test1,styles.test2]}></View>
+     </View>
+     )
    }
-
- 
-  
  }
+
+ const styles = StyleSheet.create({
+   test1:{
+     width: 100,
+     height:30,
+   },
+   test2:{
+     backgroundColor: 'red'
+   }
+ })
 
  export default HomeScreen;
