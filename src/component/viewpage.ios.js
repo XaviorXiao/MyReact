@@ -128,36 +128,6 @@ const screenWidth = Dimensions.get('window').width;
     }
 
 }
-
-// ViewPager.propTypes = {
-//     imageUrls: PropTypes.array,
-//     height: PropTypes.number,
-// };
-// const styles = StyleSheet.create({
-//     image: {
-//         flex: 1,
-//         backgroundColor: 'yellow'
-//     },
-//     pageItem:{
-//         width: 10,
-//         height: 10,
-//         borderRadius:5,
-//         backgroundColor:'#fff',
-//         marginHorizontal: 5,
-//     },
-//     pageContainer:{
-//         position:'absolute',
-//         width: '100%',
-//         bottom: 10,
-//         flexDirection:'row',
-//         justifyContent: 'center',
-//         backgroundColor:'#e10008'
-//     },
-//     pageSelected:{
-//         backgroundColor : '#e10008'
-//     }
-// })
-
 const styles = StyleSheet.create({
     image: {
         width: screenWidth,
@@ -178,11 +148,6 @@ const styles = StyleSheet.create({
     },
     circleSelected: {
         backgroundColor: 'blue',
-        // width: 10,
-        // height: 10,
-        // borderRadius: 5,
-        // // backgroundColor: '#fff',
-        // marginHorizontal: 5
     }
 });
 

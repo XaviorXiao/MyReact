@@ -7,7 +7,7 @@ class MineScreen extends React.Component{
         headerLeft:(
         <Button onPress = {() => navigation.navigate('Mine')}
         title = 'Mine'
-        color= '#fff'/>)
+        color= '#fff'/>),
       }
     }
     render(){
