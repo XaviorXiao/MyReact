@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     circleContainer: {
         position: 'absolute',
         width: '100%',
-        bottom: 10,
+        bottom: 50,
         flexDirection: 'row',
         justifyContent: 'center',
     },

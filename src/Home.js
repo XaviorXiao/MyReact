@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View,Button,Image,Alert,AsyncStorage,StyleSheet} from 'react-native';
 
 import ViewPager from './component/viewpage'
-import HeaderImage from './component/HeaderImage'
+import HomeItemComponent from './component/HomeItemComponent'
 
 
 
@@ -13,6 +13,13 @@ const imageUrls = ['https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=76
 const imageUrl =  imageUrls[0];
 
  class HomeScreen extends React.Component{
+   constructor(props){
+     super(props)
+     this._pushDetail = this._pushDetail.bind(this)
+     this.state= {
+          backName : 'go to detail'
+     }
+   }
    static navigationOptions = ({navigation}) => { 
      return{
       title: '首页',//这个属性可以支持自定义组件
@@ -40,19 +47,31 @@ const imageUrl =  imageUrls[0];
     await AsyncStorage.clear();
     this.props.navigation.navigate('Auth')
   }
+
+  //进入详情页,传递参数
+  _pushDetail(itemId){
+    this.props.navigation.navigate('Detail',{
+      itemId:itemId,
+      otherParas: 'add other params you want',
+      callback:(data) => {
+        this.setState({
+          backName:data
+       })
+      }
+    })
+  }
   
   render(){
     console.log('this is home page')
      return(
      <View style = {{ flex : 1 , alignItems: 'center'}}>
+     <View style = {{height : 250,alignItems:'center'}}>
      <ViewPager imageUrls ={imageUrls}/>
-     <HeaderImage imageUrl = {imageUrl}/>
-     <Text> HomeScreen </Text>
-     <Button onPress = {() => this.props.navigation.navigate('Detail',{
-       itemId: 86,
-       otherParas: 'add other params you want'
-     })}
-     title = 'Go to Detail'/>
+     <HomeItemComponent _pushDetail = {this._pushDetail.bind(this)}/>
+     </View>
+     
+     <Button onPress = {this._pushDetail}
+     title = {this.state.backName}/>
      <Button onPress = {this._signOutAsync}
      title = '退出登录'/>
      <View style = {[styles.test1,styles.test2]}></View>
